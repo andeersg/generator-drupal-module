@@ -1,9 +1,8 @@
-# generator-yeoman [![Build Status](https://secure.travis-ci.org/andeersg/generator-yeoman.png?branch=master)](https://travis-ci.org/andeersg/generator-yeoman)
-
-> [Yeoman](http://yeoman.io) generator
-
-
+# generator-drupal-module
 ## Getting Started
+
+This is a small generator to create a Drupal module.
+
 
 ### What is Yeoman?
 
