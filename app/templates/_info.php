@@ -1,0 +1,4 @@
+name = <%= module_name %>
+description = <%= module_desc %>
+core = 7.x
+package = Other

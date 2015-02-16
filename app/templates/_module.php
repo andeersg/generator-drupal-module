@@ -1,0 +1,67 @@
+<?php
+/**
+ * @file
+ * .module file.
+ */
+
+<% if (hooks.menu == true) { %>
+/**
+ * Implements hook_menu().
+ */
+function <%= module_name %>_menu() {
+  $items = array();
+  $items[''] = array(
+    'title' => '',
+    'description' => '',
+    'access arguments' => array(''),
+    'page callback' => '',
+    'page arguments' => array(''),
+  );
+  return $items;
+}
+<% } %>
+
+<% if (hooks.menu == true) { %>
+/**
+ * Implements hook_theme().
+ */
+function <%= module_name %>_theme($existing, $type, $theme, $path) {
+  $items = array();
+  $items[''] = array(
+    'variable' => array(),
+    'path' => '',
+    'template' => '',
+  );
+  return $items;
+}
+<% } %>
+
+<% if (hooks.menu == true) { %>
+/**
+ * Implements hook_block_info().
+ */
+function <%= module_name %>_block_info() {
+  $blocks = array();
+  //$blocks['syndicate'] = array(
+  //  'info' => t('Syndicate'),
+  //  'cache' => DRUPAL_NO_CACHE,
+  //);
+
+  return $blocks;
+}
+
+/**
+ * Implements hook_block_view().
+ */
+function <%= module_name %>_block_view($delta = '') {
+  $block = array();
+
+  switch ($delta) {
+    case 'example':
+      $block['subject'] = 'Example title';
+      $block['content'] = 'Could be a render array';
+      break;
+  }
+  return $block;
+}
+<% } %>
