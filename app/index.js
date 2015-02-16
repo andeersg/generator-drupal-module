@@ -64,6 +64,9 @@ module.exports = yeoman.generators.Base.extend({
       this.mkdir(context.module_name);
       this.template('_info.php', context.module_name +'/' + context.module_name + '.info', context);
       this.template('_module.php', context.module_name +'/' + context.module_name + '.module', context);
+      if (context.hooks.theme) {
+        this.mkdir(context.module_name +'/templates');
+      }
     }
   }
 });

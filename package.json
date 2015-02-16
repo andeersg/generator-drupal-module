@@ -1,7 +1,7 @@
 {
   "name": "generator-drupal-module",
-  "version": "0.0.0",
-  "description": "Drupal Module generator",
+  "version": "0.1.0",
+  "description": "Generate a module folder with files for Drupal 7",
   "license": "MIT",
   "main": "app/index.js",
   "repository": "andeersg/generator-drupal-module",
