@@ -1,9 +1,8 @@
 <?php
 /**
  * @file
- * .module file.
+ * <%= module_name %>.module file.
  */
-
 <% if (hooks.menu == true) { %>
 /**
  * Implements hook_menu().
@@ -18,10 +17,8 @@ function <%= module_name %>_menu() {
     'page arguments' => array(''),
   );
   return $items;
-}
-<% } %>
-
-<% if (hooks.menu == true) { %>
+}<% } %>
+<% if (hooks.theme == true) { %>
 /**
  * Implements hook_theme().
  */
@@ -33,10 +30,20 @@ function <%= module_name %>_theme($existing, $type, $theme, $path) {
     'template' => '',
   );
   return $items;
-}
-<% } %>
-
-<% if (hooks.menu == true) { %>
+}<% } %>
+<% if (hooks.perm == true) { %>
+/**
+ * Implements hook_permission().
+ */
+function <%= module_name %>_permission() {
+  return array(
+    'administer my module' => array(
+      'title' => t('Administer my module'),
+      'description' => t('Perform administration tasks for my module.'),
+    ),
+  );
+}<% } %>
+<% if (hooks.block == true) { %>
 /**
  * Implements hook_block_info().
  */

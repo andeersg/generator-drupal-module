@@ -37,6 +37,17 @@ module.exports = yeoman.generators.Base.extend({
       name: 'hookBlocks',
       message: 'Would you like to add block hooks?',
       default: false
+    }
+    ,{
+      type: 'confirm',
+      name: 'hookPerm',
+      message: 'Would you like to add hook_permissions()?',
+      default: false
+    },{
+      type: 'confirm',
+      name: 'install',
+      message: 'Would you like to add install file?',
+      default: false
     }];
 
     this.prompt(prompts, function (props) {
@@ -45,6 +56,8 @@ module.exports = yeoman.generators.Base.extend({
       this.hookMenu = props.hookMenu;
       this.hookTheme = props.hookTheme;
       this.hookBlocks = props.hookBlocks;
+      this.hookPerm = props.hookPerm;
+      this.install = props.install;
 
       done();
     }.bind(this));
@@ -58,14 +71,19 @@ module.exports = yeoman.generators.Base.extend({
         hooks: {
           block: this.hookBlocks,
           menu: this.hookMenu,
-          theme: this.hookTheme
-        }
+          theme: this.hookTheme,
+          perm: this.hookPerm
+        },
+        install: this.install
       };
       this.mkdir(context.module_name);
       this.template('_info.php', context.module_name +'/' + context.module_name + '.info', context);
       this.template('_module.php', context.module_name +'/' + context.module_name + '.module', context);
       if (context.hooks.theme) {
         this.mkdir(context.module_name +'/templates');
+      }
+      if (context.install) {
+        this.template('_install.php', context.module_name +'/' + context.module_name + '.install', context);
       }
     }
   }
