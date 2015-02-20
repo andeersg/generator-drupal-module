@@ -59,10 +59,41 @@ module.exports = yeoman.generators.Base.extend({
       this.moduleName = props.moduleName;
       this.moduleDesc = props.moduleDesc;
       this.install = props.install;
-      this.hooks = props.hooks;
-console.log(props.hooks);
+     // this.hooks = props.hooks;
+
+
+      var def_value_hooks = {
+        perm: false,
+        menu: false,
+        theme: false,
+        block: false
+      };
+      props.hooks.forEach(function(v) {
+        def_value_hooks[v] = true;
+      });
+      this.hooks = def_value_hooks;
+
       done();
     }.bind(this));
+
+    var dep_quest = [
+      {
+        name: "dependency",
+        message: "Need any dependencies? (Leave blank to continue)"
+      }
+    ];
+    var dependencies = [];
+    function ask(that) {
+      that.prompt( dep_quest, function( answers ) {
+        dependencies.push( answers.dependency );
+        if (answers.dependency !== '') {
+          ask(that);
+        }
+      });
+    }
+    ask(this);
+
+    this.dependencies = dependencies;
   },
 
   writing: {
