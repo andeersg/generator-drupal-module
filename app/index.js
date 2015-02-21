@@ -59,8 +59,6 @@ module.exports = yeoman.generators.Base.extend({
       this.moduleName = props.moduleName;
       this.moduleDesc = props.moduleDesc;
       this.install = props.install;
-     // this.hooks = props.hooks;
-
 
       var def_value_hooks = {
         perm: false,
@@ -75,7 +73,8 @@ module.exports = yeoman.generators.Base.extend({
 
       done();
     }.bind(this));
-
+  },
+  dependencies: function() {
     var dep_quest = [
       {
         name: "dependency",
@@ -89,11 +88,13 @@ module.exports = yeoman.generators.Base.extend({
         if (answers.dependency !== '') {
           ask(that);
         }
-      });
+        else {
+          this.dependencies = dependencies;
+          done();
+        }
+      }.bind(this));
     }
     ask(this);
-
-    this.dependencies = dependencies;
   },
 
   writing: {
