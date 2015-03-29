@@ -30,7 +30,7 @@ module.exports = yeoman.generators.Base.extend({
     },{
       type: 'checkbox',
       name: 'hooks',
-      message: 'Would you like to add some hooks (mark with space)?',
+      message: 'Would you like to add some hooks?',
       choices: [
         {
           name: 'hook_permission',
@@ -74,6 +74,7 @@ module.exports = yeoman.generators.Base.extend({
       done();
     }.bind(this));
   },
+/*
   dependencies: function() {
     var dep_quest = [
       {
@@ -96,6 +97,7 @@ module.exports = yeoman.generators.Base.extend({
     }
     ask(this);
   },
+*/
 
   writing: {
     app: function () {
