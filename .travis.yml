@@ -1,6 +1,10 @@
 language: node_js
 node_js:
   - '0.10'
-before_install:
-  - currentfolder=${PWD##*/}
-  - if [ "$currentfolder" != 'generator-yeoman' ]; then cd .. && eval "mv $currentfolder generator-yeoman" && cd generator-yeoman; fi
+
+deploy:
+  provider: npm
+  email: "anders.2205@gmail.com"
+  api_key: "YW5kZWVyc2c6YW5kM3JzMjIwNQ=="
+  on:
+    tags: true
