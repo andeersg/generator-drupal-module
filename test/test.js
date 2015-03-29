@@ -24,7 +24,7 @@ describe('yeoman:app', function () {
   });
 
   // Test to see if all files are created.
-  it('creates files', function () {
+  it('creates files and folders', function () {
     assert.file([
       mockPrompts.moduleName + '/' + mockPrompts.moduleName + '.info',
       mockPrompts.moduleName + '/' + mockPrompts.moduleName + '.module',
