@@ -12,3 +12,9 @@ are pretty common.
       |- modulename.install
       |- modulename.module
       |- templates
+
+## Planned:
+
+1. Add dependencies
+2. More hooks
+3. Other useful stuff? (know of something you think others also could benefit from? create an issue)
