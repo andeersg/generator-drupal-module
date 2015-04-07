@@ -10,8 +10,8 @@ module.exports = yeoman.generators.Base.extend({
 
   prompting: function () {
     var done = this.async();
+    var self = this;
 
-    // Have Yeoman greet the user.
     this.log(yosay(
       'Welcome to the groovy ' + chalk.red('Drupal Module') + ' generator!'
     ));
@@ -55,6 +55,24 @@ module.exports = yeoman.generators.Base.extend({
       ]
     }];
 
+    var dependencies = [];
+    var dependency = function(self) {
+      var dep_quest = {
+        name: "dependency",
+        message: "Need any dependencies? (Leave blank to continue)"
+      };
+      self.prompt([dep_quest], function(props) {
+        if (props.dependency !== '') {
+          dependencies.push(props.dependency);
+          dependency(self);
+        }
+        else {
+          self.dependencies = dependencies;
+          done();
+        }
+      });
+    }
+
     this.prompt(prompts, function (props) {
       this.moduleName = props.moduleName;
       this.moduleDesc = props.moduleDesc;
@@ -71,33 +89,15 @@ module.exports = yeoman.generators.Base.extend({
       });
       this.hooks = def_value_hooks;
 
-      done();
+      // For now we skip the recursive part when testing.
+      if (!this.options['skip-install']) {
+        dependency(self);
+      }
+      else {
+        done();
+      }
     }.bind(this));
   },
-/*
-  dependencies: function() {
-    var dep_quest = [
-      {
-        name: "dependency",
-        message: "Need any dependencies? (Leave blank to continue)"
-      }
-    ];
-    var dependencies = [];
-    function ask(that) {
-      that.prompt( dep_quest, function( answers ) {
-        dependencies.push( answers.dependency );
-        if (answers.dependency !== '') {
-          ask(that);
-        }
-        else {
-          this.dependencies = dependencies;
-          done();
-        }
-      }.bind(this));
-    }
-    ask(this);
-  },
-*/
 
   writing: {
     app: function () {
@@ -105,7 +105,8 @@ module.exports = yeoman.generators.Base.extend({
         module_name: this.moduleName,
         module_desc: this.moduleDesc,
         hooks: this.hooks,
-        install: this.install
+        install: this.install,
+        dependencies: this.dependencies
       };
       this.mkdir(context.module_name);
       this.template('_info.php', context.module_name +'/' + context.module_name + '.info', context);

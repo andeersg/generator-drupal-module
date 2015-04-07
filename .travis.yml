@@ -1,10 +1,12 @@
 language: node_js
 node_js:
-  - '0.10'
-
+- '0.10'
 deploy:
   provider: npm
-  email: "anders.2205@gmail.com"
-  api_key: "YW5kZWVyc2c6YW5kM3JzMjIwNQ=="
+  email: anders.2205@gmail.com
+  api_key: YW5kZWVyc2c6YW5kM3JzMjIwNQ==
   on:
     tags: true
+notifications:
+  slack:
+    secure: mqolrmsInQYHS716gaPhgI1peFkTnBla5iyiEFL6S4Nznc2bxTPkx456Wt7WmMZE9pNz0SV+n/k/y4mTxHJ98RD9dmDkM2yyrmTh9Qf2Bu1t9th3s12T7yChyY5d1rHsmF2H/lXPsjldSvI5+ohxp5970QRR3XBGenky52oEi8Q=
