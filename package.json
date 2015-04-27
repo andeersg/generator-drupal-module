@@ -28,6 +28,7 @@
     "yosay": "^0.3.0"
   },
   "devDependencies": {
+    "istanbul": "^0.3.13",
     "mocha": "*"
   },
   "peerDependencies": {

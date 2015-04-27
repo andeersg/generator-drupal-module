@@ -6,6 +6,9 @@ var yosay = require('yosay');
 module.exports = yeoman.generators.Base.extend({
   initializing: function () {
     this.pkg = require('../package.json');
+    this.options.dependencyPropTransformer = this.options.dependencyPropTransformer || function(prop) {
+      return prop;
+    };
   },
 
   prompting: function () {
@@ -62,7 +65,8 @@ module.exports = yeoman.generators.Base.extend({
         message: "Need any dependencies? (Leave blank to continue)"
       };
       self.prompt([dep_quest], function(props) {
-        if (props.dependency !== '') {
+        props = self.options.dependencyPropTransformer(props);
+        if (props.dependency && props.dependency !== '') {
           dependencies.push(props.dependency);
           dependency(self);
         }
@@ -71,7 +75,7 @@ module.exports = yeoman.generators.Base.extend({
           done();
         }
       });
-    }
+    };
 
     this.prompt(prompts, function (props) {
       this.moduleName = props.moduleName;
@@ -89,19 +93,13 @@ module.exports = yeoman.generators.Base.extend({
       });
       this.hooks = def_value_hooks;
 
-      // For now we skip the recursive part when testing.
-      if (!this.options['skip-install']) {
-        dependency(self);
-      }
-      else {
-        done();
-      }
+      dependency(self);
     }.bind(this));
   },
 
   writing: {
     app: function () {
-      var context = { 
+      var context = {
         module_name: this.moduleName,
         module_desc: this.moduleDesc,
         hooks: this.hooks,
@@ -111,7 +109,7 @@ module.exports = yeoman.generators.Base.extend({
       this.mkdir(context.module_name);
       this.template('_info.php', context.module_name +'/' + context.module_name + '.info', context);
       this.template('_module.php', context.module_name +'/' + context.module_name + '.module', context);
-      if (typeof context.hooks.theme !== 'undefined') {
+      if (context.hooks.theme) {
         this.mkdir(context.module_name +'/templates');
       }
       if (context.install) {
