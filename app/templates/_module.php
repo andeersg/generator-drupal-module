@@ -25,7 +25,7 @@ function <%= module_name %>_menu() {
 function <%= module_name %>_theme($existing, $type, $theme, $path) {
   $items = array();
   $items[''] = array(
-    'variable' => array(),
+    'variables' => array(),
     'path' => '',
     'template' => '',
   );
