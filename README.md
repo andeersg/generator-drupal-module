@@ -31,6 +31,5 @@ are pretty common.
 
 ## Planned:
 
-1. Add dependencies
-2. More hooks
-3. Other useful stuff? (know of something you think others also could benefit from? create an issue)
+1. More hooks
+2. Other useful stuff? (know of something you think others also could benefit from? create an issue)
