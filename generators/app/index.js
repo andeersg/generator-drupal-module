@@ -56,6 +56,11 @@ module.exports = yeoman.generators.Base.extend({
           default: false
         }
       ]
+    },{
+      type: 'confirm',
+      name: 'panels_stuff',
+      message: 'Do you want panels stuff?',
+      default: false
     }];
 
     var dependencies = [];
@@ -82,6 +87,8 @@ module.exports = yeoman.generators.Base.extend({
       this.moduleDesc = props.moduleDesc;
       this.install = props.install;
 
+      this.panels_stuff = props.panels_stuff;
+
       var def_value_hooks = {
         perm: false,
         menu: false,
@@ -95,6 +102,12 @@ module.exports = yeoman.generators.Base.extend({
 
       dependency(self);
     }.bind(this));
+  },
+
+  default: function() {
+    if (this.panels_stuff) {
+      this.invoke('drupal-module:panels');
+    }
   },
 
   writing: {
