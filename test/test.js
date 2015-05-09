@@ -21,13 +21,14 @@ var mockPrompts = {
   moduleDesc: 'Test creation of module',
   install: true,
   hooks: ['theme'],
-  dependency: testDependency
+  dependency: testDependency,
+  extras: []
 };
 var opts = { dependencyPropTransformer: dependencyPropTransformer };
 
 describe('yeoman:app', function () {
   var runGenerator = function(callback) {
-      helpers.run(path.join(__dirname, '../app'))
+      helpers.run(path.join(__dirname, '../generators/app'))
         .inDir(path.join(os.tmpdir(), './temp-test'))
         .withOptions(opts)
         .withPrompt(mockPrompts)
@@ -55,7 +56,8 @@ describe('yeoman:app', function () {
       moduleName: 'testModule2',
       moduleDesc: 'Test creation of module',
       hooks: [],
-      dependency: ''
+      dependency: '',
+      extras: []
     };
     runGenerator(function() {
       assert.file([
