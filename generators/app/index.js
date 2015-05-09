@@ -57,10 +57,16 @@ module.exports = yeoman.generators.Base.extend({
         }
       ]
     },{
-      type: 'confirm',
-      name: 'panels_stuff',
-      message: 'Do you want panels stuff?',
-      default: false
+      type: 'checkbox',
+      name: 'extras',
+      message: 'Do you want extra features?',
+      choices: [
+        {
+          name: 'Rules hooks',
+          value: 'rules',
+          default: false
+        }
+      ]
     }];
 
     var dependencies = [];
@@ -87,7 +93,7 @@ module.exports = yeoman.generators.Base.extend({
       this.moduleDesc = props.moduleDesc;
       this.install = props.install;
 
-      this.panels_stuff = props.panels_stuff;
+      this.extras = props.extras;
 
       var def_value_hooks = {
         perm: false,
@@ -104,9 +110,13 @@ module.exports = yeoman.generators.Base.extend({
     }.bind(this));
   },
 
+
   default: function() {
-    if (this.panels_stuff) {
-      this.invoke('drupal-module:panels');
+    if (this.extras.indexOf('rules') != -1) {
+      this.composeWith('drupal-module:rules', {
+        options: {'module_name': this.moduleName}
+      });
+      this.log(chalk.green('Rules functionality added.'));
     }
   },
 
