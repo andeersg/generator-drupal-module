@@ -5,7 +5,7 @@ var yosay = require('yosay');
 
 module.exports = yeoman.generators.Base.extend({
   initializing: function () {
-    this.pkg = require('../package.json');
+    this.pkg = require('../../package.json');
     this.options.dependencyPropTransformer = this.options.dependencyPropTransformer || function(prop) {
       return prop;
     };
@@ -21,7 +21,18 @@ module.exports = yeoman.generators.Base.extend({
 
     var prompts = [{
       name: 'moduleName',
-      message: 'What is the name of this module?'
+      message: 'What is the name of this module?',
+      filter: function(input) {
+        // Replace illegal characters with
+        var handled = input.replace(/[^0-9A-Za-z .]/g, '');
+        // Then replace spaces with underscore.
+        handled = handled.replace(' ', '_');
+        handled = handled.toLowerCase();
+
+        self.niceName = input;
+
+        return handled;
+      }
     },{
       name: 'moduleDesc',
       message: 'Describe your module:'
@@ -56,6 +67,17 @@ module.exports = yeoman.generators.Base.extend({
           default: false
         }
       ]
+    },{
+      type: 'checkbox',
+      name: 'extras',
+      message: 'Do you want extra features?',
+      choices: [
+        {
+          name: 'Rules hooks',
+          value: 'rules',
+          default: false
+        }
+      ]
     }];
 
     var dependencies = [];
@@ -82,6 +104,8 @@ module.exports = yeoman.generators.Base.extend({
       this.moduleDesc = props.moduleDesc;
       this.install = props.install;
 
+      this.extras = props.extras;
+
       var def_value_hooks = {
         perm: false,
         menu: false,
@@ -97,6 +121,16 @@ module.exports = yeoman.generators.Base.extend({
     }.bind(this));
   },
 
+
+  default: function() {
+    if (this.extras.indexOf('rules') != -1) {
+      this.composeWith('drupal-module:rules', {
+        options: {'module_name': this.moduleName}
+      });
+      this.log(chalk.green('Rules functionality added.'));
+    }
+  },
+
   writing: {
     app: function () {
       var context = {
@@ -104,7 +138,8 @@ module.exports = yeoman.generators.Base.extend({
         module_desc: this.moduleDesc,
         hooks: this.hooks,
         install: this.install,
-        dependencies: this.dependencies
+        dependencies: this.dependencies,
+        niceName: this.niceName
       };
       this.mkdir(context.module_name);
       this.template('_info.php', context.module_name +'/' + context.module_name + '.info', context);
