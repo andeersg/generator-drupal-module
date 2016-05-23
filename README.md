@@ -2,6 +2,7 @@ Drupal Module Generator!
 ========================
 [![Build Status](https://travis-ci.org/andeersg/generator-drupal-module.svg?branch=master)](https://travis-ci.org/andeersg/generator-drupal-module)
 [![Coverage Status](https://coveralls.io/repos/andeersg/generator-drupal-module/badge.svg)](https://coveralls.io/r/andeersg/generator-drupal-module)
+[![Code Climate](https://codeclimate.com/github/andeersg/generator-drupal-module/badges/gpa.svg)](https://codeclimate.com/github/andeersg/generator-drupal-module)
 
 Fast and easy way to setup a module scaffolding with the most important files and functions you need to start developing.
 
