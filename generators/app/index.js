@@ -1,15 +1,14 @@
 'use strict';
+
 var yeoman = require('yeoman-generator');
 var chalk = require('chalk');
 var yosay = require('yosay');
 var mkdirp = require('mkdirp');
 
 module.exports = yeoman.Base.extend({
+
   initializing: function () {
     this.pkg = require('../../package.json');
-    this.options.dependencyPropTransformer = this.options.dependencyPropTransformer || function(prop) {
-      return prop;
-    };
   },
 
   prompting: function () {
@@ -22,10 +21,10 @@ module.exports = yeoman.Base.extend({
     var prompts = [{
       name: 'moduleName',
       message: 'What is the name of this module?',
-      filter: function(input) {
-        // Replace illegal characters with
+
+      /* istanbul ignore next */
+      filter: function (input) {
         var handled = input.replace(/[^0-9A-Za-z .]/g, '');
-        // Then replace spaces with underscore.
         handled = handled.replace(/ /g, '_');
         handled = handled.toLowerCase();
 
@@ -33,15 +32,15 @@ module.exports = yeoman.Base.extend({
 
         return handled;
       }
-    },{
+    }, {
       name: 'moduleDesc',
       message: 'Describe your module:'
-    },{
+    }, {
       type: 'confirm',
       name: 'install',
       message: 'Would you like to add install file?',
       default: false
-    },{
+    }, {
       type: 'checkbox',
       name: 'hooks',
       message: 'Would you like to add some hooks?',
@@ -67,7 +66,7 @@ module.exports = yeoman.Base.extend({
           default: false
         }
       ]
-    },{
+    }, {
       type: 'checkbox',
       name: 'extras',
       message: 'Do you want extra features?',
@@ -81,7 +80,7 @@ module.exports = yeoman.Base.extend({
     }];
 
     return this.prompt(prompts)
-      .then(function(answers) {
+      .then(function (answers) {
         this.moduleName = answers.moduleName;
         this.moduleDesc = answers.moduleDesc;
         this.install = answers.install;
@@ -94,7 +93,7 @@ module.exports = yeoman.Base.extend({
           theme: false,
           block: false
         };
-        answers.hooks.forEach(function(v) {
+        answers.hooks.forEach(function (v) {
           def_value_hooks[v] = true;
         });
         this.hooks = def_value_hooks;
@@ -126,22 +125,22 @@ module.exports = yeoman.Base.extend({
       mkdirp(context.module_name);
       this.fs.copyTpl(
         this.templatePath('_info.php'),
-        this.destinationPath(context.module_name +'/' + context.module_name + '.info'),
+        this.destinationPath(context.module_name + '/' + context.module_name + '.info'),
         context
       );
       this.fs.copyTpl(
         this.templatePath('_module.php'),
-        this.destinationPath(context.module_name +'/' + context.module_name + '.module'),
+        this.destinationPath(context.module_name + '/' + context.module_name + '.module'),
         context
       );
       if (context.hooks.theme) {
         mkdirp(context.module_name + '/templates');
       }
       if (context.install) {
-        this.template('_install.php', context.module_name +'/' + context.module_name + '.install', context);
+        this.template('_install.php', context.module_name + '/' + context.module_name + '.install', context);
         this.fs.copyTpl(
           this.templatePath('_install.php'),
-          this.destinationPath(context.module_name +'/' + context.module_name + '.install'),
+          this.destinationPath(context.module_name + '/' + context.module_name + '.install'),
           context
         );
       }
