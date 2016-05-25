@@ -14,7 +14,7 @@
     "node": ">=0.10.0"
   },
   "scripts": {
-    "test": "mocha"
+    "test": "NODE_ENV=test istanbul cover -- _mocha"
   },
   "files": [
     "app"
@@ -23,8 +23,11 @@
     "yeoman-generator"
   ],
   "dependencies": {
-    "yeoman-generator": "^0.23.3",
     "chalk": "^1.0.0",
+    "mkdirp": "^0.5.1",
+    "yeoman-assert": "^2.2.1",
+    "yeoman-generator": "^0.23.3",
+    "yeoman-test": "^1.4.0",
     "yosay": "^1.1.1"
   },
   "devDependencies": {
