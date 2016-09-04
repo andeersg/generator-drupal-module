@@ -9,6 +9,7 @@ var mockPrompts = {
   moduleDesc: 'Test creation of module',
   install: true,
   hooks: ['theme'],
+  dependency: '',
   extras: []
 };
 

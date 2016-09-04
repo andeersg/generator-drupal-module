@@ -92,7 +92,9 @@ module.exports = yeoman.Base.extend({
         this.moduleMachine = answers.moduleMachine;
         this.moduleDesc = answers.moduleDesc;
         this.install = answers.install;
-        this.dependencies = answers.dependency.split(' ');
+        if (answers.dependency) {
+          this.dependencies = answers.dependency.split(' ');
+        }
 
         this.extras = answers.extras;
 
