@@ -12,7 +12,7 @@ module.exports = yeoman.Base.extend({
   },
 
   prompting: function () {
-    var self = this;
+    // var self = this;
 
     this.log(yosay(
       'Welcome to the groovy ' + chalk.red('Drupal Module') + ' generator!'
@@ -20,21 +20,25 @@ module.exports = yeoman.Base.extend({
 
     var prompts = [{
       name: 'moduleName',
-      message: 'What is the name of this module?',
-
-      /* istanbul ignore next */
-      filter: function (input) {
-        var handled = input.replace(/[^0-9A-Za-z .]/g, '');
+      message: 'Name:'
+    }, {
+      name: 'moduleMachine',
+      message: 'Machine-name:',
+      default: function (answers) {
+        var handled = answers.moduleName.replace(/[^0-9A-Za-z .]/g, '');
         handled = handled.replace(/ /g, '_');
         handled = handled.toLowerCase();
-
-        self.niceName = input;
-
         return handled;
+      },
+      validate: function (answer) {
+        if (answer.match(/^[a-z0-9_]+$/)) {
+          return true;
+        }
+        return 'Machine names can only contain a-z 0-9 and underscores.';
       }
     }, {
       name: 'moduleDesc',
-      message: 'Describe your module:'
+      message: 'Description:'
     }, {
       type: 'confirm',
       name: 'install',
@@ -67,6 +71,9 @@ module.exports = yeoman.Base.extend({
         }
       ]
     }, {
+      name: 'dependency',
+      message: 'Add dependencies (separate with a space, leave blank to skip):'
+    }, {
       type: 'checkbox',
       name: 'extras',
       message: 'Do you want extra features?',
@@ -82,8 +89,10 @@ module.exports = yeoman.Base.extend({
     return this.prompt(prompts)
       .then(function (answers) {
         this.moduleName = answers.moduleName;
+        this.moduleMachine = answers.moduleMachine;
         this.moduleDesc = answers.moduleDesc;
         this.install = answers.install;
+        this.dependencies = answers.dependency.split(' ');
 
         this.extras = answers.extras;
 
@@ -97,6 +106,7 @@ module.exports = yeoman.Base.extend({
           def_value_hooks[v] = true;
         });
         this.hooks = def_value_hooks;
+
       }.bind(this));
   },
 
@@ -115,12 +125,12 @@ module.exports = yeoman.Base.extend({
   writing: {
     app: function () {
       var context = {
-        module_name: this.moduleName,
+        module_name: this.moduleMachine,
         module_desc: this.moduleDesc,
         hooks: this.hooks,
         install: this.install,
         dependencies: this.dependencies,
-        niceName: this.niceName
+        niceName: this.moduleName
       };
       mkdirp(context.module_name);
       this.fs.copyTpl(

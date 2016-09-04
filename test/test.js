@@ -41,7 +41,7 @@ describe('drupal_module', function () {
 
   describe('Test with different input', function () {
     before(function (done) {
-      mockPrompts.moduleName = 'my_awesome_module';
+      mockPrompts.moduleName = 'My Awesome Module';
       mockPrompts.hooks = [];
       mockPrompts.install = false;
 
