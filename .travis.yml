@@ -1,20 +1,18 @@
 language: node_js
-
 node_js:
 - '4'
-
 deploy:
   provider: npm
   email: anders.2205@gmail.com
-  api_key: YW5kZWVyc2c6YW5kM3JzMjIwNQ==
+  api_key:
+    secure: D4lz6F5C8txbVs+wTrlQpPlbSsFNxSdZczTP9IwzqVbF/N5cb2Sq403qfvecDenw6zzjZz/+1EIYXruK4QqrsmuMfryhxIp4Dh3ysZrkxwS4OQbFe6t1jVvcRlQ148glWIisNK594nTOhq8gMWXzxOK8S/22Tr/g3SlxeIUVg6s=
   on:
     tags: true
-
+    repo: andeersg/generator-drupal-module
 notifications:
   slack:
     secure: mqolrmsInQYHS716gaPhgI1peFkTnBla5iyiEFL6S4Nznc2bxTPkx456Wt7WmMZE9pNz0SV+n/k/y4mTxHJ98RD9dmDkM2yyrmTh9Qf2Bu1t9th3s12T7yChyY5d1rHsmF2H/lXPsjldSvI5+ohxp5970QRR3XBGenky52oEi8Q=
-
 after_script:
-  - ./node_modules/.bin/istanbul cover -- ./node_modules/.bin/_mocha
-  - cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js > /dev/null 2>&1
-  
+- "./node_modules/.bin/istanbul cover -- ./node_modules/.bin/_mocha"
+- cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js > /dev/null
+  2>&1
