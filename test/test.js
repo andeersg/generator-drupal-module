@@ -6,6 +6,7 @@ var helpers = require('yeoman-test');
 
 var mockPrompts = {
   moduleName: 'testModule',
+  machineName: 'testmodule',
   moduleDesc: 'Test creation of module',
   install: true,
   hooks: ['theme'],
@@ -31,10 +32,10 @@ describe('drupal_module', function () {
     // Test to see if all files are created.
     it('creates files and folders', function () {
       assert.file([
-        mockPrompts.moduleName + '/' + mockPrompts.moduleName + '.info',
-        mockPrompts.moduleName + '/' + mockPrompts.moduleName + '.module',
-        mockPrompts.moduleName + '/' + mockPrompts.moduleName + '.install',
-        mockPrompts.moduleName + '/templates'
+        mockPrompts.machineName + '/' + mockPrompts.machineName + '.info',
+        mockPrompts.machineName + '/' + mockPrompts.machineName + '.module',
+        mockPrompts.machineName + '/' + mockPrompts.machineName + '.install',
+        mockPrompts.machineName + '/templates'
       ]);
     });
 
