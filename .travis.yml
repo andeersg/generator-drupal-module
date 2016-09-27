@@ -1,6 +1,6 @@
 language: node_js
 node_js:
-- '4'
+  - "6"
 deploy:
   provider: npm
   email: anders.2205@gmail.com
