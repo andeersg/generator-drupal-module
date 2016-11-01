@@ -11,7 +11,7 @@
     "url": "https://github.com/andeersg"
   },
   "engines": {
-    "node": ">=0.10.0"
+    "node": ">= 4"
   },
   "scripts": {
     "test": "NODE_ENV=test istanbul cover -- _mocha"
