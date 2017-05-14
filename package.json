@@ -25,14 +25,14 @@
   "dependencies": {
     "chalk": "^1.0.0",
     "mkdirp": "^0.5.1",
-    "yeoman-assert": "^2.2.1",
-    "yeoman-generator": "^0.24.1",
+    "yeoman-assert": "^3.0.0",
+    "yeoman-generator": "^1.1.1",
     "yeoman-test": "^1.4.0",
-    "yosay": "^1.1.1"
+    "yosay": "^2.0.0"
   },
   "devDependencies": {
     "coveralls": "^2.11.2",
     "istanbul": "^0.4.3",
-    "mocha": "3.1.2"
+    "mocha": "3.4.1"
   }
 }
