@@ -1,5 +1,7 @@
 Drupal Module Generator!
 ========================
+
+[![Greenkeeper badge](https://badges.greenkeeper.io/andeersg/generator-drupal-module.svg)](https://greenkeeper.io/)
 [![Build Status](https://travis-ci.org/andeersg/generator-drupal-module.svg?branch=master)](https://travis-ci.org/andeersg/generator-drupal-module)
 [![Coverage Status](https://coveralls.io/repos/andeersg/generator-drupal-module/badge.svg)](https://coveralls.io/r/andeersg/generator-drupal-module)
 [![Code Climate](https://codeclimate.com/github/andeersg/generator-drupal-module/badges/gpa.svg)](https://codeclimate.com/github/andeersg/generator-drupal-module)
